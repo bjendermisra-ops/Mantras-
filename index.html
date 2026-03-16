@@ -4,22 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ISKCON Complete Mantra System</title>
-    <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- FontAwesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Tiro+Devanagari+Sanskrit&display=swap" rel="stylesheet">
-    
-    <!-- ✅ Custom CSS (आपके GitHub के अनुसार 'style.css') -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Background Canvas for Devotional Animation -->
     <canvas id="devotionalCanvas"></canvas>
 
-    <!-- Navbar & Language Auto-System -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-saffron sticky-top shadow-sm">
         <div class="container">
             <a class="navbar-brand fw-bold fs-4" href="#"><i class="fa-solid fa-om"></i> ISKCON Mantras</a>
@@ -34,39 +27,34 @@
         </div>
     </nav>
 
-    <!-- Header & Search/Filter Section -->
-    <header class="text-center py-5 text-white position-relative header-content">
-        <h1 class="fw-bold display-4">Mantra Knowledge System</h1>
-        <p class="lead fw-semibold" id="headerSubtext">सम्पूर्ण गौड़ीय वैष्णव मंत्र</p>
+    <!-- 🛠️ FIXED: text-white की जगह text-dark और text-saffron कर दिया है -->
+    <header class="text-center py-5 position-relative header-content">
+        <h1 class="fw-bold display-4 text-saffron" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">Mantra Knowledge System</h1>
+        <p class="lead fw-bold text-dark" id="headerSubtext">सम्पूर्ण गौड़ीय वैष्णव मंत्र</p>
         
         <div class="container mt-4">
             <div class="row justify-content-center g-3">
                 <div class="col-md-8 col-lg-6">
-                    <div class="input-group input-group-lg shadow-sm">
+                    <div class="input-group input-group-lg shadow-sm border border-warning rounded">
                         <span class="input-group-text bg-white text-saffron border-0"><i class="fa-solid fa-magnifying-glass"></i></span>
-                        <input type="text" id="searchInput" class="form-control border-0" placeholder="मंत्र खोजें (उदा. हरे कृष्ण)...">
+                        <input type="text" id="searchInput" class="form-control border-0 fw-bold text-dark" placeholder="मंत्र खोजें (उदा. हरे कृष्ण)...">
                     </div>
                 </div>
             </div>
             <div class="row justify-content-center mt-3">
                 <div class="col-md-8 col-lg-6">
-                    <select id="categoryFilter" class="form-select form-select-lg shadow-sm border-0 text-center fw-bold text-saffron">
+                    <select id="categoryFilter" class="form-select form-select-lg shadow-sm border border-warning text-center fw-bold text-saffron">
                         <option value="ALL">All Categories / सभी श्रेणियाँ</option>
-                        <!-- Categories dynamically injected by app.js -->
                     </select>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Mantra Cards Container -->
     <main class="container my-5 position-relative z-index-1">
-        <div class="row g-4" id="mantraContainer">
-            <!-- Cards will be dynamically injected here -->
-        </div>
+        <div class="row g-4" id="mantraContainer"></div>
     </main>
 
-    <!-- Mantra Detail Modal -->
     <div class="modal fade" id="mantraModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen-md-down modal-lg modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content devotional-border">
@@ -76,26 +64,13 @@
                 </div>
                 <div class="modal-body text-center p-md-5 p-3">
                     <span class="badge bg-warning text-dark mb-4 px-3 py-2 fs-6 rounded-pill shadow-sm" id="modalCategory">Category</span>
-                    
-                    <!-- Sanskrit Shloka -->
-                    <div class="sanskrit-text text-danger mb-4 fw-bold" id="modalSanskrit">
-                        <!-- Sanskrit text injected here -->
-                    </div>
-                    
+                    <div class="sanskrit-text text-danger mb-4 fw-bold" id="modalSanskrit"></div>
                     <hr class="text-muted w-50 mx-auto">
-
-                    <!-- Translation -->
-                    <div class="translation-text text-dark mb-4 fw-semibold" id="modalTranslation">
-                        <!-- Translation injected here -->
-                    </div>
-                    
-                    <!-- Meaning / Explanation -->
+                    <div class="translation-text text-dark mb-4 fw-semibold" id="modalTranslation"></div>
                     <div class="meaning-box bg-white p-4 rounded-4 shadow-sm border-start border-warning border-4 text-start mt-4">
                         <h5 class="fw-bold text-saffron mb-3"><i class="fa-solid fa-book-open"></i> <span id="meaningLabel">अर्थ (Meaning)</span>:</h5>
-                        <p class="mb-0 text-secondary fs-6 lh-lg" id="modalMeaning">Meaning text here</p>
+                        <p class="mb-0 text-secondary fs-6 lh-lg" id="modalMeaning">Meaning text</p>
                     </div>
-
-                    <!-- Audio Player Simulation -->
                     <div class="mt-5 audio-player p-3 bg-light rounded-pill d-inline-block shadow-sm border">
                         <button class="btn btn-danger rounded-circle shadow" id="playAudioBtn" style="width: 50px; height: 50px;">
                             <i class="fa-solid fa-play fs-5"></i>
@@ -103,7 +78,6 @@
                         <span class="ms-3 text-dark fs-5 fw-bold" id="audioLabel">ऑडियो सुनें</span>
                     </div>
                 </div>
-                <!-- Action Buttons -->
                 <div class="modal-footer justify-content-center bg-light">
                     <button type="button" class="btn btn-outline-dark px-4 fw-bold rounded-pill" id="copyBtn"><i class="fa-regular fa-copy"></i> Copy</button>
                     <button type="button" class="btn btn-success px-4 fw-bold rounded-pill shadow-sm" id="shareBtn"><i class="fa-brands fa-whatsapp"></i> Share</button>
@@ -112,16 +86,8 @@
         </div>
     </div>
 
-    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- ✅ 1. Database File (आपके GitHub के अनुसार 'database.js') -->
     <script src="database.js"></script> 
-
-    <!-- ✅ 2. Canvas Animation File (आपके GitHub के अनुसार 'canvas.js') -->
-    <script src="canvas.js"></script>
-
-    <!-- ✅ 3. App Logic File (आपके GitHub के अनुसार 'app.js') -->
     <script src="app.js"></script>    
 </body>
 </html>
