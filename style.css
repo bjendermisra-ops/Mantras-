@@ -1,0 +1,80 @@
+/* style.css */
+:root {
+    --saffron: #FF6600;
+    --saffron-dark: #CC5200;
+    --gold: #FFD700;
+    --maroon: #800000;
+    --cream: #FFFDD0;
+    --light-cream: #FFFAF0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f9f9f9;
+}
+
+/* Typography for Mantras */
+.sanskrit-text {
+    font-family: 'Noto Serif Devanagari', serif;
+    font-size: 1.5rem;
+    line-height: 1.8;
+    white-space: pre-line;
+    font-weight: 700;
+}
+
+/* Custom Colors & Backgrounds */
+.bg-saffron { background-color: var(--saffron) !important; }
+.bg-gold { background-color: var(--gold) !important; }
+.bg-light-cream { background-color: var(--light-cream) !important; }
+.text-saffron { color: var(--saffron) !important; }
+.text-maroon { color: var(--maroon) !important; }
+.text-gold { color: var(--gold) !important; }
+
+/* Borders */
+.border-gold { border: 1px solid rgba(255, 215, 0, 0.6) !important; }
+
+/* Buttons */
+.btn-saffron {
+    background-color: var(--saffron);
+    border-color: var(--saffron);
+    color: white;
+}
+.btn-saffron:hover {
+    background-color: var(--saffron-dark);
+    color: white;
+}
+.btn-outline-saffron {
+    color: var(--saffron);
+    border-color: var(--saffron);
+}
+.btn-outline-saffron:hover, .btn-outline-saffron.active {
+    background-color: var(--saffron);
+    color: white;
+}
+
+/* Cards */
+.mantra-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(to bottom right, #ffffff, var(--light-cream));
+}
+.mantra-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(255, 102, 0, 0.2) !important;
+    border: 1px solid var(--gold);
+}
+
+/* Header Animation Specific */
+.devotional-header {
+    background: linear-gradient(135deg, var(--saffron), var(--maroon));
+    overflow: hidden;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.z-index-1 { z-index: 1; }
+
+.audio-btn { width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; }
