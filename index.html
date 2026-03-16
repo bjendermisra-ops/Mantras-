@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISKCON Mantras | Devotional Library</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts for Devotional Look -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Canvas Animation Background Header -->
+    <header class="devotional-header position-relative text-center text-white py-5 shadow-sm">
+        <canvas id="devotionalCanvas" class="position-absolute top-0 start-0 w-100 h-100"></canvas>
+        <div class="position-relative z-index-1">
+            <h1 class="display-4 fw-bold">ISKCON Mantra Library</h1>
+            <p class="lead">Dive into the nectar of the Holy Names</p>
+        </div>
+    </header>
+
+    <main class="container my-4">
+        <!-- Controls: Global App Language, Search & Filter -->
+        <div class="row mb-4 align-items-center bg-white p-3 rounded shadow-sm border-gold">
+            <div class="col-md-4 mb-3 mb-md-0">
+                <div class="input-group">
+                    <span class="input-group-text bg-gold text-dark"><i class="fas fa-search"></i></span>
+                    <input type="text" id="searchInput" class="form-control" placeholder="Search mantras...">
+                </div>
+            </div>
+            <div class="col-md-4 mb-3 mb-md-0">
+                <select id="categoryFilter" class="form-select border-gold">
+                    <option value="All">All Categories</option>
+                    <option value="Chanting">Chanting</option>
+                    <option value="Pranama">Pranam Mantras</option>
+                    <option value="Arati">Arati Songs</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <div class="d-flex align-items-center justify-content-md-end">
+                    <i class="fas fa-globe text-gold me-2"></i>
+                    <select id="appLanguage" class="form-select w-auto border-gold">
+                        <option value="en">English</option>
+                        <option value="hi" selected>हिन्दी</option>
+                        <option value="mr">मराठी</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mantra Grid -->
+        <div class="row" id="mantraContainer">
+            <!-- Cards will be injected by JavaScript -->
+        </div>
+    </main>
+
+    <!-- Mantra Detail Modal -->
+    <div class="modal fade" id="mantraModal" tabindex="-1" aria-labelledby="mantraModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+            <div class="modal-content border-gold">
+                <div class="modal-header bg-saffron text-white">
+                    <h5 class="modal-title font-poppins fw-bold" id="modalTitle">Mantra Title</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" onclick="stopAudio()"></button>
+                </div>
+                <div class="modal-body bg-light-cream text-center">
+                    <!-- Sanskrit Text -->
+                    <div class="sanskrit-text text-maroon mb-4" id="modalSanskrit"></div>
+                    
+                    <!-- Language Specific Meaning -->
+                    <div class="meaning-box p-3 bg-white rounded shadow-sm border-gold mb-4 text-start">
+                        <h6 class="text-saffron fw-bold border-bottom pb-2"><i class="fas fa-book-open me-2"></i>Translation & Meaning</h6>
+                        <p id="modalTranslation" class="mt-2 text-dark"></p>
+                        <p id="modalMeaning" class="text-muted fst-italic"></p>
+                    </div>
+
+                    <!-- Audio Player Controls -->
+                    <div class="audio-controls d-flex justify-content-center align-items-center gap-3 bg-white p-3 rounded shadow-sm border-gold">
+                        <button class="btn btn-saffron rounded-circle audio-btn" id="playPauseBtn" onclick="toggleAudio()">
+                            <i class="fas fa-play" id="playIcon"></i>
+                        </button>
+                        <div class="progress w-50" style="height: 10px;">
+                            <div class="progress-bar bg-gold" id="audioProgress" role="progressbar" style="width: 0%"></div>
+                        </div>
+                        <button class="btn btn-outline-saffron rounded-circle" id="loopBtn" onclick="toggleLoop()">
+                            <i class="fas fa-infinity"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between bg-light">
+                    <button class="btn btn-outline-secondary" onclick="copyMantra()"><i class="fas fa-copy me-1"></i> Copy</button>
+                    <button class="btn btn-saffron text-white" onclick="shareMantra()"><i class="fas fa-share-alt me-1"></i> Share</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="database.js"></script>
+    <script src="canvas.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
