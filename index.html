@@ -6,81 +6,117 @@
     <title>ISKCON Complete Mantra System</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Tiro+Devanagari+Sanskrit&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- Background Animation Canvas -->
     <canvas id="devotionalCanvas"></canvas>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-saffron sticky-top shadow-sm">
+    <!-- Top Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-saffron sticky-top shadow">
         <div class="container">
-            <a class="navbar-brand fw-bold fs-4" href="#"><i class="fa-solid fa-om"></i> ISKCON Mantras</a>
-            <div class="d-flex align-items-center">
-                <i class="fa-solid fa-language text-white me-2 fs-4"></i>
-                <select id="langSelector" class="form-select form-select-sm shadow-sm fw-bold">
-                    <option value="en">English</option>
-                    <option value="hi" selected>हिंदी (Hindi)</option>
-                    <option value="mr">मराठी (Marathi)</option>
-                </select>
+            <a class="navbar-brand fw-bold fs-4 d-flex align-items-center" href="#">
+                <i class="fa-solid fa-hands-praying me-2 text-white"></i> 
+                <span class="brand-text">ISKCON Mantras</span>
+            </a>
+            
+            <div class="d-flex align-items-center gap-3">
+                <!-- Font Resizer Controls -->
+                <div class="font-controls d-flex align-items-center bg-white bg-opacity-25 rounded-pill px-2 py-1">
+                    <button class="btn btn-sm text-white font-btn" onclick="changeFontSize(-0.1)" title="Decrease Text Size"><i class="fa-solid fa-minus"></i> A</button>
+                    <span class="text-white mx-1 fw-bold">|</span>
+                    <button class="btn btn-sm text-white font-btn" onclick="resetFontSize()" title="Reset Text Size"><i class="fa-solid fa-rotate-right"></i></button>
+                    <span class="text-white mx-1 fw-bold">|</span>
+                    <button class="btn btn-sm text-white font-btn" onclick="changeFontSize(0.1)" title="Increase Text Size">A <i class="fa-solid fa-plus"></i></button>
+                </div>
+
+                <!-- Language Selector -->
+                <div class="d-flex align-items-center">
+                    <i class="fa-solid fa-language text-white me-2 fs-4"></i>
+                    <select id="langSelector" class="form-select form-select-sm shadow-sm fw-bold border-0 cursor-pointer">
+                        <option value="en">English</option>
+                        <option value="hi" selected>हिंदी</option>
+                        <option value="mr">मराठी</option>
+                    </select>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- 🛠️ FIXED: text-white की जगह text-dark और text-saffron कर दिया है -->
+    <!-- Header Section -->
     <header class="text-center py-5 position-relative header-content">
-        <h1 class="fw-bold display-4 text-saffron" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">Mantra Knowledge System</h1>
-        <p class="lead fw-bold text-dark" id="headerSubtext">सम्पूर्ण गौड़ीय वैष्णव मंत्र</p>
-        
-        <div class="container mt-4">
-            <div class="row justify-content-center g-3">
-                <div class="col-md-8 col-lg-6">
-                    <div class="input-group input-group-lg shadow-sm border border-warning rounded">
-                        <span class="input-group-text bg-white text-saffron border-0"><i class="fa-solid fa-magnifying-glass"></i></span>
-                        <input type="text" id="searchInput" class="form-control border-0 fw-bold text-dark" placeholder="मंत्र खोजें (उदा. हरे कृष्ण)...">
+        <div class="container">
+            <div class="hero-box p-4 rounded-4 shadow-sm mx-auto" style="max-width: 800px; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px);">
+                <i class="fa-solid fa-dharmachakra fs-1 text-saffron mb-2 spinner-slow"></i>
+                <h1 class="fw-bolder display-5 text-dark">Mantra Knowledge System</h1>
+                <p class="lead fw-bold text-saffron mb-4" id="headerSubtext">सम्पूर्ण गौड़ीय वैष्णव मंत्र</p>
+                
+                <div class="row justify-content-center g-3">
+                    <div class="col-12">
+                        <div class="search-wrapper position-relative shadow-sm rounded-pill overflow-hidden border border-2 border-warning">
+                            <span class="position-absolute top-50 start-0 translate-middle-y ms-3 text-saffron"><i class="fa-solid fa-magnifying-glass fs-5"></i></span>
+                            <input type="text" id="searchInput" class="form-control form-control-lg border-0 fw-medium bg-white ps-5" placeholder="मंत्र खोजें (उदा. हरे कृष्ण)...">
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="row justify-content-center mt-3">
-                <div class="col-md-8 col-lg-6">
-                    <select id="categoryFilter" class="form-select form-select-lg shadow-sm border border-warning text-center fw-bold text-saffron">
-                        <option value="ALL">All Categories / सभी श्रेणियाँ</option>
-                    </select>
+                    <div class="col-12 mt-3">
+                        <select id="categoryFilter" class="form-select form-select-lg shadow-sm border border-2 border-warning text-center fw-bold text-dark rounded-pill cursor-pointer category-select">
+                            <option value="ALL">All Categories / सभी श्रेणियाँ</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
 
+    <!-- Main Content -->
     <main class="container my-5 position-relative z-index-1">
         <div class="row g-4" id="mantraContainer"></div>
     </main>
 
+    <!-- Mantra Modal -->
     <div class="modal fade" id="mantraModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen-md-down modal-lg modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content devotional-border">
-                <div class="modal-header bg-saffron text-white">
-                    <h5 class="modal-title fw-bold fs-4" id="modalTitle">Mantra Title</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-content devotional-border border-0 shadow-lg">
+                <div class="modal-header bg-saffron text-white border-0">
+                    <h5 class="modal-title fw-bold fs-4 d-flex align-items-center" id="modalTitle">
+                        <i class="fa-solid fa-leaf me-2"></i> <span>Mantra Title</span>
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body text-center p-md-5 p-3">
-                    <span class="badge bg-warning text-dark mb-4 px-3 py-2 fs-6 rounded-pill shadow-sm" id="modalCategory">Category</span>
-                    <div class="sanskrit-text text-danger mb-4 fw-bold" id="modalSanskrit"></div>
-                    <hr class="text-muted w-50 mx-auto">
-                    <div class="translation-text text-dark mb-4 fw-semibold" id="modalTranslation"></div>
-                    <div class="meaning-box bg-white p-4 rounded-4 shadow-sm border-start border-warning border-4 text-start mt-4">
-                        <h5 class="fw-bold text-saffron mb-3"><i class="fa-solid fa-book-open"></i> <span id="meaningLabel">अर्थ (Meaning)</span>:</h5>
-                        <p class="mb-0 text-secondary fs-6 lh-lg" id="modalMeaning">Meaning text</p>
+                <div class="modal-body text-center p-md-5 p-4 custom-scrollbar">
+                    <span class="badge bg-warning text-dark mb-4 px-4 py-2 fs-6 rounded-pill shadow-sm fw-bold border border-white" id="modalCategory">Category</span>
+                    
+                    <div class="sanskrit-text text-danger mb-4 fw-bold scale-text" id="modalSanskrit"></div>
+                    
+                    <div class="d-flex justify-content-center mb-4">
+                        <hr class="text-muted w-25 border-2 rounded-pill">
+                        <i class="fa-solid fa-fan mx-3 text-warning fs-5 spinner-slow"></i>
+                        <hr class="text-muted w-25 border-2 rounded-pill">
                     </div>
-                    <div class="mt-5 audio-player p-3 bg-light rounded-pill d-inline-block shadow-sm border">
-                        <button class="btn btn-danger rounded-circle shadow" id="playAudioBtn" style="width: 50px; height: 50px;">
-                            <i class="fa-solid fa-play fs-5"></i>
+                    
+                    <div class="translation-text text-dark mb-4 fw-semibold scale-text" id="modalTranslation"></div>
+                    
+                    <div class="meaning-box bg-light p-4 rounded-4 shadow-sm border-start border-warning border-4 text-start mt-4 scale-text">
+                        <h5 class="fw-bold text-saffron mb-3"><i class="fa-solid fa-book-open"></i> <span id="meaningLabel">अर्थ (Meaning)</span>:</h5>
+                        <p class="mb-0 text-secondary lh-lg fw-medium" id="modalMeaning">Meaning text</p>
+                    </div>
+                    
+                    <div class="mt-5 audio-player px-4 py-3 bg-white rounded-pill d-inline-block shadow-sm border border-warning hover-lift">
+                        <button class="btn btn-danger rounded-circle shadow-sm" id="playAudioBtn" style="width: 45px; height: 45px;">
+                            <i class="fa-solid fa-play"></i>
                         </button>
                         <span class="ms-3 text-dark fs-5 fw-bold" id="audioLabel">ऑडियो सुनें</span>
                     </div>
                 </div>
-                <div class="modal-footer justify-content-center bg-light">
-                    <button type="button" class="btn btn-outline-dark px-4 fw-bold rounded-pill" id="copyBtn"><i class="fa-regular fa-copy"></i> Copy</button>
-                    <button type="button" class="btn btn-success px-4 fw-bold rounded-pill shadow-sm" id="shareBtn"><i class="fa-brands fa-whatsapp"></i> Share</button>
+                <div class="modal-footer justify-content-center bg-light border-0">
+                    <button type="button" class="btn btn-outline-dark px-4 fw-bold rounded-pill shadow-sm hover-lift" id="copyBtn">
+                        <i class="fa-regular fa-copy me-1"></i> Copy
+                    </button>
+                    <button type="button" class="btn btn-success px-4 fw-bold rounded-pill shadow-sm hover-lift" id="shareBtn" style="background-color: #25D366; border-color: #25D366;">
+                        <i class="fa-brands fa-whatsapp me-1"></i> Share
+                    </button>
                 </div>
             </div>
         </div>
