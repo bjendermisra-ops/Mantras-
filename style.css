@@ -1,82 +1,139 @@
+/* ROOT VARIABLES FOR DYNAMIC FONT SIZING & THEMING */
 :root {
-    --saffron: #ff9933;
-    --saffron-dark: #cc6600;
-    --gold: #ffd700;
-    --bg-light: #fffaf0;
-    --text-dark: #2c3e50;
+    --bg-color: #fdfaf6;
+    --saffron-main: #FF8C00;
+    --saffron-dark: #E65100;
+    --text-scale: 1; /* For dynamic resizing */
 }
 
 body {
+    background-color: var(--bg-color);
     font-family: 'Poppins', sans-serif;
-    background-color: var(--bg-light);
-    color: var(--text-dark);
+    color: #333;
     overflow-x: hidden;
 }
 
-.bg-saffron { background: linear-gradient(135deg, var(--saffron-dark), var(--saffron)); }
-.text-saffron { color: var(--saffron-dark); }
-
-/* Devotional Canvas Overlay */
-#devotionalCanvas {
-    position: fixed;
-    top: 0; left: 0; width: 100vw; height: 100vh;
-    z-index: 0;
-    pointer-events: none;
-    opacity: 0.7;
+.bg-saffron {
+    background: linear-gradient(135deg, var(--saffron-main), var(--saffron-dark)) !important;
 }
 
-.header-content, .z-index-1 {
-    z-index: 1;
-    position: relative;
+.text-saffron {
+    color: var(--saffron-dark) !important;
 }
 
-/* Typography for Mantras */
+/* SANSKRIT FONT STYLING */
 .sanskrit-text {
     font-family: 'Tiro Devanagari Sanskrit', serif;
-    font-size: 1.5rem;
     line-height: 1.8;
+    color: #b71c1c !important;
+    font-size: calc(1.3rem * var(--text-scale));
 }
 
 .translation-text {
-    font-size: 1.2rem;
-    line-height: 1.6;
+    font-size: calc(1.1rem * var(--text-scale));
+    line-height: 1.7;
 }
 
-/* Glassmorphism Mantra Cards */
+.scale-text p, .scale-text {
+    font-size: calc(1rem * var(--text-scale));
+}
+
+/* NAVBAR & FONT CONTROLS */
+.brand-text {
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+.font-btn {
+    padding: 0.1rem 0.5rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+.font-btn:hover {
+    background: rgba(255,255,255,0.3);
+    transform: scale(1.1);
+}
+
+/* SELECT OPTIONS UI */
+.cursor-pointer {
+    cursor: pointer;
+}
+.category-select {
+    background-color: #fffaf0;
+    transition: all 0.3s;
+}
+.category-select:focus {
+    box-shadow: 0 0 0 0.25rem rgba(255, 140, 0, 0.25);
+    background-color: #fff;
+}
+
+/* MANTRA CARDS */
 .mantra-card {
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    border: none;
-    border-bottom: 5px solid var(--saffron);
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: white;
+    border: 1px solid rgba(255, 140, 0, 0.1);
+    border-bottom: 4px solid var(--saffron-main);
     cursor: pointer;
 }
 
 .mantra-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(204, 102, 0, 0.2);
-    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 15px 25px rgba(0,0,0,0.1) !important;
+    border-bottom: 4px solid #b71c1c;
 }
 
+.mantra-card .card-title {
+    font-size: calc(1.2rem * var(--text-scale));
+}
+.mantra-card .card-text {
+    font-size: calc(1.1rem * var(--text-scale)) !important;
+}
+
+/* BACKGROUND CANVAS */
+#devotionalCanvas {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.header-content {
+    z-index: 2;
+}
+
+/* MODAL STYLES */
 .devotional-border {
-    border: 3px solid var(--saffron);
+    border-radius: 20px;
+    overflow: hidden;
 }
 
-.modal-content {
-    background-color: #fffcf5;
+.hover-lift {
+    transition: transform 0.2s;
+}
+.hover-lift:hover {
+    transform: translateY(-3px);
 }
 
-/* Custom Scrollbar for Modal */
-.modal-body::-webkit-scrollbar {
-    width: 8px;
+/* ANIMATIONS */
+.spinner-slow {
+    animation: spin 8s linear infinite;
 }
-.modal-body::-webkit-scrollbar-track {
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+/* CUSTOM SCROLLBAR FOR MODAL */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
     background: #f1f1f1; 
 }
-.modal-body::-webkit-scrollbar-thumb {
-    background: var(--saffron); 
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--saffron-main); 
     border-radius: 10px;
 }
-.modal-body::-webkit-scrollbar-thumb:hover {
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background: var(--saffron-dark); 
 }
