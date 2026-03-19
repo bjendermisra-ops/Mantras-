@@ -14,7 +14,7 @@ const langSelector = document.getElementById('langSelector');
 document.addEventListener('DOMContentLoaded', () => {
     initCategories();
     updateUILanguage();
-    renderMantras(mantraDB);
+    renderMantras(mantras);
     initCanvasAnimation(); 
 });
 
@@ -68,7 +68,7 @@ function applyFilters() {
     const query = searchInput.value.toLowerCase();
     const category = categoryFilter.value;
     
-    const filtered = mantraDB.filter(m => {
+    const filtered = mantras.filter(m => {
         const matchesSearch = m.title.toLowerCase().includes(query) || 
                               m.sanskrit.includes(query) || 
                               (m.translations[currentLang] && m.translations[currentLang].toLowerCase().includes(query));
@@ -90,7 +90,7 @@ function updateUILanguage() {
 let currentMantraTextForCopy = "";
 
 function openMantra(id) {
-    const mantra = mantraDB.find(m => m.id === id);
+    const mantra = mantras.find(m => m.id === id);
     if(!mantra) return;
 
     document.getElementById('modalTitle').textContent = mantra.title;
@@ -130,7 +130,7 @@ function initCanvasAnimation() {
         height = canvas.height = window.innerHeight;
     });
 
-    const particles = [];
+    const particles =[];
     const symbols =["ॐ", "🪷", "✨"];
 
     for (let i = 0; i < 30; i++) {
