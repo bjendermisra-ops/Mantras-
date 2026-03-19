@@ -1,3 +1,4 @@
+const mantras =[
    // --- 1. FOUNDATION MANTRAS ---
     {
         id: "F1", category: "FOUNDATION MANTRAS",
